@@ -29,15 +29,15 @@ export default function Home() {
   };
   return (
     <main className="min-h-screen bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 font-sans selection:bg-blue-200 dark:selection:bg-blue-900 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 flex flex-col min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-20 flex flex-col min-h-screen">
         
         {/* Header */}
-        <header className="mb-12 flex justify-between items-start md:items-center">
+        <header className="mb-8 sm:mb-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 sm:gap-0">
           <div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-3 sm:mb-4">
               Understand any <span className="text-blue-600 dark:text-blue-500">screenshot.</span>
             </h1>
-            <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl">
+            <p className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl">
               Upload or paste a screenshot and turn it into useful information and actions.
             </p>
           </div>

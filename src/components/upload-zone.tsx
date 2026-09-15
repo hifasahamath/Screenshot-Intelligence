@@ -124,21 +124,21 @@ export function UploadZone({ onAnalyzeStart, onAnalyzeSuccess, onAnalyzeError, i
           onChange={handleFileChange}
         />
         
-        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center pointer-events-none">
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-8 text-center pointer-events-none">
           <div className={`
-            w-20 h-20 mb-6 rounded-full flex items-center justify-center
+            w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6 rounded-full flex items-center justify-center
             transition-transform duration-300 ease-out
             ${isDragging ? 'scale-110 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 group-hover:scale-105'}
           `}>
-            <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-8 h-8 sm:w-10 sm:h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
             </svg>
           </div>
           
-          <h3 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
+          <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 dark:text-neutral-100 mb-1 sm:mb-2">
             Drop a screenshot here
           </h3>
-          <p className="text-neutral-500 dark:text-neutral-400 mb-6 max-w-sm">
+          <p className="text-sm sm:text-base text-neutral-500 dark:text-neutral-400 mb-4 sm:mb-6 max-w-sm">
             or paste from clipboard
           </p>
           

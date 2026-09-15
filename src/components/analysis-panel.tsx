@@ -87,14 +87,14 @@ export function AnalysisPanel({ analysis, isLoading, file }: AnalysisPanelProps)
   }
 
   return (
-    <div className="bg-white dark:bg-neutral-900 rounded-3xl p-6 sm:p-8 shadow-sm border border-neutral-200 dark:border-neutral-800 flex flex-col h-full animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="bg-white dark:bg-neutral-900 rounded-3xl p-5 sm:p-6 lg:p-8 shadow-sm border border-neutral-200 dark:border-neutral-800 flex flex-col h-full animate-in fade-in slide-in-from-bottom-4 duration-500">
       
       {/* Header */}
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
         <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider mb-3">
           {analysis.category.replace('_', ' ')}
         </div>
-        <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 leading-tight">
+        <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900 dark:text-neutral-100 leading-tight">
           {analysis.summary}
         </h2>
       </div>
