@@ -43,7 +43,16 @@ export function AnalysisPanel({ analysis, isLoading, file }: AnalysisPanelProps)
         body: formData,
       });
       
-      if (!res.ok) throw new Error("Failed to get answer");
+      if (!res.ok) {
+        let errMessage = "Failed to get answer";
+        try {
+          const err = await res.json();
+          errMessage = err.detail || errMessage;
+        } catch {
+          errMessage = await res.text() || errMessage;
+        }
+        throw new Error(errMessage);
+      }
       
       const data = await res.json();
       setAnswer(data.answer);

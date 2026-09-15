@@ -35,7 +35,7 @@ async def analyze_screenshot(image: UploadFile = File(...)):
         analysis = await analyze_image_with_gemini(content, image.content_type)
         return analysis.model_dump()
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/api/ask")
 async def ask_question(
@@ -51,4 +51,4 @@ async def ask_question(
         answer = await answer_question_with_gemini(content, image.content_type, question, previous_analysis)
         return answer.model_dump()
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e))

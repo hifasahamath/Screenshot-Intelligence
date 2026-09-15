@@ -53,8 +53,14 @@ export function UploadZone({ onAnalyzeStart, onAnalyzeSuccess, onAnalyzeError, i
       });
       
       if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.detail || "Failed to analyze screenshot");
+        let errMessage = "Failed to analyze screenshot";
+        try {
+          const err = await res.json();
+          errMessage = err.detail || errMessage;
+        } catch {
+          errMessage = await res.text() || errMessage;
+        }
+        throw new Error(errMessage);
       }
       
       const data = await res.json();
