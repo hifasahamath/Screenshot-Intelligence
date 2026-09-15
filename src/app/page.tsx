@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { UploadZone } from "./components/upload-zone";
-import { AnalysisPanel } from "./components/analysis-panel";
-import { ThemeToggle } from "./components/theme-toggle";
+import { UploadZone } from "@/components/upload-zone";
+import { AnalysisPanel } from "@/components/analysis-panel";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
