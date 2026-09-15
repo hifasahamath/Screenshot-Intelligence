@@ -1,7 +1,13 @@
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Depends
+from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from fastapi.middleware.cors import CORSMiddleware
-import os
+from pydantic import ValidationError
 import json
+import os
+from dotenv import load_dotenv
+
+# Load local environment variables for development
+load_dotenv(".env.local")
+
 from api.services.ai_service import analyze_image_with_gemini, answer_question_with_gemini
 import os
 
