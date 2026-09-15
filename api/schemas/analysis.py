@@ -8,7 +8,7 @@ class BoundingBox(BaseModel):
     height: int
 
 class Entity(BaseModel):
-    type: str = Field(..., description="The type of entity (e.g., 'URL', 'Email', 'Date', 'Price')")
+    entity_type: str = Field(..., description="The type of entity (e.g., 'URL', 'Email', 'Date', 'Price')")
     value: str = Field(..., description="The extracted value")
     bounding_box: Optional[BoundingBox] = None
 

@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 load_dotenv(".env.local")
 
 from api.services.ai_service import analyze_image_with_gemini, answer_question_with_gemini
-import os
 
 app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json")
 

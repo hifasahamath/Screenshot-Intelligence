@@ -1,15 +1,23 @@
 import os
+from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 from pydantic import BaseModel
 from api.schemas.analysis import AnalysisResponse, AnswerResponse
 
-# Assuming GEMINI_API_KEY is in the environment
-client = genai.Client()
+# Ensure we load the environment variables before initializing the client
+dotenv_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env.local")
+load_dotenv(dotenv_path)
+
+# Initialize the Gemini client (it will automatically pick up GEMINI_API_KEY from os.environ)
+api_key = os.environ.get("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError(f"API key not found. Looked in {dotenv_path}")
+client = genai.Client(api_key=api_key)
 MODEL_ID = "gemini-3.6-flash"
 
 async def analyze_image_with_gemini(image_bytes: bytes, mime_type: str) -> AnalysisResponse:
-    prompt = """
+    prompt = f"""
     You are Screenshot Intelligence, an expert AI designed to turn screenshots into actionable information.
     Analyze the uploaded screenshot carefully.
     
@@ -21,7 +29,8 @@ async def analyze_image_with_gemini(image_bytes: bytes, mime_type: str) -> Analy
     6. Suggest a list of actionable steps the user could take based on the extracted info (e.g., "explain", "copy", "open_url").
     7. Extract all visible text exactly as it appears.
     
-    Output strictly as JSON matching the schema.
+    Output strictly as JSON matching the following JSON Schema:
+    {AnalysisResponse.model_json_schema()}
     """
     
     response = client.models.generate_content(
@@ -32,12 +41,11 @@ async def analyze_image_with_gemini(image_bytes: bytes, mime_type: str) -> Analy
         ],
         config=types.GenerateContentConfig(
             response_mime_type="application/json",
-            response_schema=AnalysisResponse,
             temperature=0.2,
         ),
     )
     
-    return response.parsed
+    return AnalysisResponse.model_validate_json(response.text)
 
 async def answer_question_with_gemini(image_bytes: bytes, mime_type: str, question: str, previous_analysis: str) -> AnswerResponse:
     prompt = f"""
@@ -49,6 +57,9 @@ async def answer_question_with_gemini(image_bytes: bytes, mime_type: str, questi
     
     User Question:
     {question}
+    
+    Output strictly as JSON matching the following JSON Schema:
+    {AnswerResponse.model_json_schema()}
     """
     
     response = client.models.generate_content(
@@ -59,9 +70,8 @@ async def answer_question_with_gemini(image_bytes: bytes, mime_type: str, questi
         ],
         config=types.GenerateContentConfig(
             response_mime_type="application/json",
-            response_schema=AnswerResponse,
             temperature=0.2,
         ),
     )
     
-    return response.parsed
+    return AnswerResponse.model_validate_json(response.text)

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { UploadZone } from "./components/upload-zone";
 import { AnalysisPanel } from "./components/analysis-panel";
+import { ThemeToggle } from "./components/theme-toggle";
 
 export default function Home() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -31,19 +32,22 @@ export default function Home() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 flex flex-col min-h-screen">
         
         {/* Header */}
-        <header className="mb-12 text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-            Understand any <span className="text-blue-600 dark:text-blue-500">screenshot.</span>
-          </h1>
-          <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl">
-            Upload or paste a screenshot and turn it into useful information and actions.
-          </p>
+        <header className="mb-12 flex justify-between items-start md:items-center">
+          <div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
+              Understand any <span className="text-blue-600 dark:text-blue-500">screenshot.</span>
+            </h1>
+            <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl">
+              Upload or paste a screenshot and turn it into useful information and actions.
+            </p>
+          </div>
+          <ThemeToggle />
         </header>
 
         {/* Main Workspace */}
         <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Upload / Image Viewer Area */}
-          <section className="lg:col-span-7 flex flex-col sticky top-8">
+          <section className="lg:col-span-5 flex flex-col sticky top-8">
             <UploadZone 
               isAnalyzing={isAnalyzing}
               onAnalyzeStart={handleAnalyzeStart}
@@ -53,7 +57,7 @@ export default function Home() {
           </section>
 
           {/* Analysis / Action Area */}
-          <section className="lg:col-span-5 flex flex-col">
+          <section className="lg:col-span-7 flex flex-col">
             {isAnalyzing || analysisResult ? (
               <AnalysisPanel analysis={analysisResult} isLoading={isAnalyzing} file={currentFile} />
             ) : (

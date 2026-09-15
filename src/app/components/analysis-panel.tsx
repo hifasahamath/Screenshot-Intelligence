@@ -5,7 +5,7 @@ import { EntityCard } from "./entity-card";
 import { ActionButton } from "./action-button";
 
 type Entity = {
-  type: string;
+  entity_type: string;
   value: string;
 };
 
@@ -98,7 +98,7 @@ export function AnalysisPanel({ analysis, isLoading, file }: AnalysisPanelProps)
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {analysis.entities.map((entity, idx) => (
-              <EntityCard key={idx} type={entity.type} value={entity.value} />
+              <EntityCard key={idx} type={entity.entity_type} value={entity.value} />
             ))}
           </div>
         </div>
